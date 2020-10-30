@@ -8,7 +8,7 @@ class TrainersController < ApplicationController
     def show
         trainer = Trainer.find_by(id: params[:id])
         if trainer
-            render json: trainer, include: [id: trainer.id, name: trainer.name, pokemon: trainer.pokemons ]
+            render json: trainer, include: [:pokemons]
         else
             render json: { message: 'Trainer not found' }
         end
