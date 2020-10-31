@@ -8,10 +8,8 @@ class PokemonsController < ApplicationController
     def destroy
         pokemon = Pokemon.find(params[:id])
         pokeName = pokemon.nickname
-        byebug
         pokemon.destroy
-        # render json: "pokemon removed"
-        render json: "#{pokeName} has been removed from your team!"
+        render json: { message: "#{pokeName} successfully released"}
     end
 
     private
