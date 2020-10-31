@@ -58,7 +58,7 @@ function addClickListeners(){
             .then(resp => resp.json())
             .then(deletedPoke => {
                 console.log(deletedPoke)                
-                // window.alert(deletedPoke[0])
+                // window.alert(deletedPoke)
             })
             .catch (error => console.log(error))      
         }
