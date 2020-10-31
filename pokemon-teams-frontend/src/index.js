@@ -36,19 +36,31 @@ function renderTrainers (){
 function addClickListeners(){
     document.addEventListener('click', function(e){        
         if (e.target.className === 'add-btn'){
+            let trainerId = e.target.dataset.trainerId
+            let teamList = e.target.nextElementSibling
             fetch('http://localhost:3000/pokemons', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                   trainer_id:  e.target.dataset.id
+                    trainer_id:  trainerId
                 })   
             })
             .then(resp => resp.json())
             .then(newPoke => {
-                debugger
+                teamList.innerHTML += `<li>${newPoke.nickname} (${newPoke.species})<button class="release" data-pokemon-id=${newPoke.id}>Release</button></li>`
             })
+        } else if (e.target.className === 'release'){
+            let listItem = e.target.parentElement
+            let pokeId = e.target.dataset.pokemonId  
+            fetch(`http://localhost:3000/pokemons/${pokeId}`, {method: 'DELETE'})
+            .then(resp => resp.json())
+            .then(deletedPoke => {
+                console.log(deletedPoke)                
+                // window.alert(deletedPoke[0])
+            })
+            .catch (error => console.log(error))      
         }
     })
 }
