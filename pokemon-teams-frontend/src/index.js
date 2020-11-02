@@ -56,16 +56,19 @@ function addPoke(e){
             trainer_id:  e.target.dataset.trainerId
         })   
     })
-    .then(resp => {
-        if(resp.ok){
-        resp.json()
-        }
+    .then(res => {
+        if(!res.ok) {
+            return res.text().then(text => { throw Error(text)})
+           }
+          else {
+           return res.json();
+         } 
     })
     .then(newPoke => {
         teamList.innerHTML += `<li>${newPoke.nickname} (${newPoke.species})<button class="release" data-pokemon-id=${newPoke.id}>Release</button></li>`
     })
-    .catch (error => {
-        console.log(error)        
+    .catch(errors => {
+        window.alert(errors)
     })
 }
 

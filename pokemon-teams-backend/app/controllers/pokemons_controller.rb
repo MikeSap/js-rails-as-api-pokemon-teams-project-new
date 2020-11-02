@@ -22,7 +22,6 @@ class PokemonsController < ApplicationController
         if pokemon.save
             render json: pokemon
         else
-            render json: {errors: pokemon.errors.messages, status: 500}
-        end
+            render json: {errors: pokemon.errors.messages}, status: 500        end
     end
 end
