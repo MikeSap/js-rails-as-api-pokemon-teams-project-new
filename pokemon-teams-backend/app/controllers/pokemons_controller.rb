@@ -22,7 +22,7 @@ class PokemonsController < ApplicationController
         if pokemon.save
             render json: pokemon
         else
-            render json: pokemon.errors.full_messages
+            render json: pokemon.errors.messages
         end
     end
 end
