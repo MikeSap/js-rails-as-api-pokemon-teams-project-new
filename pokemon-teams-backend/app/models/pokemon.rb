@@ -5,7 +5,7 @@ class Pokemon < ApplicationRecord
 
   def too_many_pokes    
     if self.trainer.pokemons.count >= 6
-      errors.add(:trainer, message: 'Cant have more than 6 Pokemon on your Team!')
+      errors.add(:trainer, 'Cant have more than 6 Pokemon on your Team!')
     end
   end
 
