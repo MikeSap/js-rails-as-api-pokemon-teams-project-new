@@ -56,19 +56,17 @@ function addPoke(e){
             trainer_id:  e.target.dataset.trainerId
         })   
     })
-    .then(resp => resp.json())
-    .then(newPoke => {                
-        if (newPoke['trainer'] === undefined){
-        teamList.innerHTML += `<li>${newPoke.nickname} (${newPoke.species})<button class="release" data-pokemon-id=${newPoke.id}>Release</button></li>`
-        } else {
-        window.alert(newPoke['trainer'][0]['message'])
+    .then(resp => {
+        if(resp.ok){
+        resp.json()
         }
     })
-    // .catch (error => {
-    //     debugger
-    //     window.alert(error['trainer'][0]['message'])
-    // })
-
+    .then(newPoke => {
+        teamList.innerHTML += `<li>${newPoke.nickname} (${newPoke.species})<button class="release" data-pokemon-id=${newPoke.id}>Release</button></li>`
+    })
+    .catch (error => {
+        console.log(error)        
+    })
 }
 
 function addClickListeners(){
