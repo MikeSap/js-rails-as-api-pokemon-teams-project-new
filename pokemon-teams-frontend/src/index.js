@@ -57,13 +57,17 @@ function addPoke(e){
         })   
     })
     .then(resp => resp.json())
-    .then(newPoke => {        
-        if (newPoke[0] === "Trainer {:message=>'Cant have more than 6 Pokemon on your Team!'}"){
-        error => window.alert(error['message'])
-        } else {
+    .then(newPoke => {                
+        if (newPoke['trainer'] === undefined){
         teamList.innerHTML += `<li>${newPoke.nickname} (${newPoke.species})<button class="release" data-pokemon-id=${newPoke.id}>Release</button></li>`
+        } else {
+        window.alert(newPoke['trainer'][0]['message'])
         }
     })
+    // .catch (error => {
+    //     debugger
+    //     window.alert(error['trainer'][0]['message'])
+    // })
 
 }
 
