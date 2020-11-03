@@ -57,8 +57,10 @@ function addPoke(e){
         })   
     })
     .then(res => {
-        if(!res.ok) {
-            return res.text().then(text => { throw Error(text)})
+        if(!res.ok) {            
+            return res.json().then(json => { 
+                throw Error(json.errors)
+            })
            }
           else {
            return res.json();
